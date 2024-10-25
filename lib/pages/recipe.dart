@@ -22,7 +22,6 @@ class RecipePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Scaled Image
             Image.network(
               recipe.image,
               width: double.infinity,
@@ -33,7 +32,6 @@ class RecipePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Calorie and Ingredient Count
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -49,7 +47,6 @@ class RecipePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // Health Labels
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,

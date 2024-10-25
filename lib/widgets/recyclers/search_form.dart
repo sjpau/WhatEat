@@ -249,13 +249,10 @@ class _SearchFormState extends State<SearchForm> {
   RecipeRepository recipeRepository = RecipeRepository();
 
   try {
-    // Fetch recipes from the API
     List<RecipePreview> recipes = await recipeRepository.fetchRecipes(searchData);
 
-    // Close the loading dialog
     Navigator.pop(context);
 
-    // Navigate to the ResultsPage and pass the fetched recipes
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -263,10 +260,8 @@ class _SearchFormState extends State<SearchForm> {
       ),
     );
   } catch (error) {
-    // Close the loading dialog in case of an error
     Navigator.pop(context);
 
-    // Show an error message
     showDialog(
       context: context,
       builder: (BuildContext context) {
