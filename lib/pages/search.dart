@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:what_eat_flutter/widgets/recyclers/search_form.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,7 +11,10 @@ class SearchPageState extends State<SearchPage> {   @override   Widget build(Bui
       appBar: AppBar(
         title: const Text("Search"),
       ),
-    );
+      body: const Center(
+        child: SearchForm(),
+    ),
+      );
 } 
 }
 

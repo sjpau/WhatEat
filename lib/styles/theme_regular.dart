@@ -6,7 +6,7 @@ final ThemeData themeRegular = ThemeData(
   primarySwatch: Colors.green, // Matches #81C784
   
   // Primary Color (App Bar, active buttons, etc.)
-  primaryColor: const Color.fromRGBO(246, 153, 92, 1), // Green (Lime/Herbal)
+  primaryColor: const Color(0xFF81C784), // Green (Lime/Herbal)
   
   // Accent Color for Buttons, Highlights, etc.
   colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -106,7 +106,7 @@ final ThemeData themeRegular = ThemeData(
   
   // Icon Themes
   iconTheme: const IconThemeData(
-    color: Color(0xFF4E342E), // Dark brown for icons
+    color: Color.fromARGB(255, 12, 8, 8), // Dark brown for icons
   ),
   
   // Progress Bar Theme
