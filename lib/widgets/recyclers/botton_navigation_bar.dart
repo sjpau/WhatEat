@@ -16,14 +16,6 @@ class BottomNavigationBarMain extends StatelessWidget {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Image.asset(
-            "assets/home.png",
-            width: 24,
-            height: 24,
-          ),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(
             "assets/search.png",
             width: 24,
             height: 24,

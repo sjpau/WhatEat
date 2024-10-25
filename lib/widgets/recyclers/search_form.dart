@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:what_eat_flutter/pages/results.dart';
+import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 import 'package:what_eat_flutter/repositories/edamam_api/recipe_lookup.dart';
 
 class SearchForm extends StatefulWidget {
@@ -37,7 +39,6 @@ class _SearchFormState extends State<SearchForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    // Search term input field
                     TextField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -51,7 +52,6 @@ class _SearchFormState extends State<SearchForm> {
 
                     const SizedBox(height: 16),
 
-                    // Calories input fields
                     const Text(
                       "Calories",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -121,7 +121,6 @@ class _SearchFormState extends State<SearchForm> {
 
                     const SizedBox(height: 16),
 
-                    // Dietary restrictions/Health labels multi-select
                     const Text(
                       "Dietary Restrictions",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -157,13 +156,12 @@ class _SearchFormState extends State<SearchForm> {
             ),
           ),
 
-          // Stationary Search Button at the bottom
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _isButtonEnabled ? _onSearchPressed : null, // Disable if button is not enabled
+                onPressed: _isButtonEnabled ? _onSearchPressed : null,
                 child: const Text("Search"),
               ),
             ),
@@ -204,7 +202,7 @@ class _SearchFormState extends State<SearchForm> {
                           } else {
                             _selectedDietLabels.remove(label);
                           }
-                          _updateButtonState(); // Update button state when selection changes
+                          _updateButtonState(); 
                         });
                       },
                     );
@@ -227,24 +225,65 @@ class _SearchFormState extends State<SearchForm> {
   }
 
   Future<void> _onSearchPressed() async {
-    final searchData = {
-      "searchTerm": _searchTerm,
-      "calories": {
-        "from": _caloriesFrom,
-        "to": _caloriesTo,
-      },
-      "mealType": _selectedMealType,
-      "dietaryRestrictions": _selectedDietLabels,
-    };
-/*
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => LoadingPage(searchData: searchData),
-    ),
+    // Show loading dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false, // Prevents dialog from closing if tapped outside
+    builder: (BuildContext context) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    },
   );
-  */
-    RecipeRepository recipeRepository = RecipeRepository();
-    await recipeRepository.fetchRecipes(searchData);
+
+  final searchData = {
+    "searchTerm": _searchTerm,
+    "calories": {
+      "from": _caloriesFrom,
+      "to": _caloriesTo,
+    },
+    "mealType": _selectedMealType,
+    "dietaryRestrictions": _selectedDietLabels,
+  };
+
+  RecipeRepository recipeRepository = RecipeRepository();
+
+  try {
+    // Fetch recipes from the API
+    List<RecipePreview> recipes = await recipeRepository.fetchRecipes(searchData);
+
+    // Close the loading dialog
+    Navigator.pop(context);
+
+    // Navigate to the ResultsPage and pass the fetched recipes
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultsPage(recipes: recipes),
+      ),
+    );
+  } catch (error) {
+    // Close the loading dialog in case of an error
+    Navigator.pop(context);
+
+    // Show an error message
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: Text("Failed to load recipes: $error"),
+          actions: [
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   }
 }

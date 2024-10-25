@@ -35,7 +35,6 @@ final ThemeData themeRegular = ThemeData(
       fontWeight: FontWeight.bold,
       color: const Color(0xFF4E342E), // Dark Brown
     ),
-    // For body text like instructions, descriptions
     bodyLarge: GoogleFonts.roboto(
       fontSize: 16.0,
       fontWeight: FontWeight.normal,
@@ -48,7 +47,6 @@ final ThemeData themeRegular = ThemeData(
     ),
     ),
   
-  // Button Theme
   buttonTheme: ButtonThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0),

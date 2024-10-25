@@ -42,7 +42,7 @@ List<RecipePreview> extractRecipes(Map<String, dynamic> responseData) {
         String source = recipeData['source'] ?? '';
         String url = recipeData['url'] ?? '';
         String shareAs = recipeData['shareAs'] ?? '';
-        double calories = recipeData['calories']?.toDouble() ?? 0.0;
+        int calories = recipeData['calories']?.toInt();
         List<String> healthLabels = List<String>.from(recipeData['healthLabels'] ?? []);
         int ingredientCount = recipeData['ingredients'] != null
             ? recipeData['ingredients'].length

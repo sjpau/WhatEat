@@ -14,7 +14,7 @@ class RecipePreview {
 
   final String label;
   final String image;
-  final double calories;
+  final int calories;
   final int ingredientCount;
   final String url;
   final String shareAs;
