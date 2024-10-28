@@ -32,8 +32,8 @@ class SettingsPage extends StatelessWidget {
             title: Text(theme['name']),
             trailing: isSelected ? const Icon(Icons.check, color: Colors.blue) : null,
             onTap: () {
-              // Change theme using ThemeProvider
               themeProvider.setTheme(theme['data']);
+              //TODO: make theme persistent
             },
           );
         },
