@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData themeRegular = ThemeData(
-  primarySwatch: Colors.green, 
+  primarySwatch: Colors.lightGreen, 
   
   primaryColor: const Color(0xFF81C784), 
   
@@ -11,7 +11,6 @@ final ThemeData themeRegular = ThemeData(
   ),
   
   scaffoldBackgroundColor: const Color(0xFFFFFFFF), // Creamy White
-  canvasColor: const Color(0xFFFFECB3), // Soft Yellow
   
   textTheme: TextTheme(
     displayLarge: GoogleFonts.poppins(
