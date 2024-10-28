@@ -6,7 +6,7 @@ import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.d
 class RecipeTile extends StatelessWidget {
   final RecipePreview recipe;
 
-  const RecipeTile({Key? key, required this.recipe}) : super(key: key);
+  const RecipeTile({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {

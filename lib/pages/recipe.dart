@@ -7,8 +7,7 @@ class RecipePage extends StatefulWidget {
   final RecipePreview recipe;
   final bool isFavourite;
 
-  const RecipePage({Key? key, required this.recipe, required this.isFavourite})
-      : super(key: key);
+  const RecipePage({super.key, required this.recipe, required this.isFavourite});
 
   @override
   _RecipePageState createState() => _RecipePageState();
@@ -120,11 +119,11 @@ class _RecipePageState extends State<RecipePage> {
                 final url = Uri.parse(widget.recipe.url);
                 await _launchUrl(url); 
               },
-              child: const Text("Full Recipe"),
               style: ElevatedButton.styleFrom(
                 foregroundColor: theme.colorScheme.secondary, 
                 backgroundColor: theme.scaffoldBackgroundColor,
               ),
+              child: const Text("Full Recipe"),
             ),
           ],
         ),

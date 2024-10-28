@@ -15,7 +15,7 @@ class _SearchFormState extends State<SearchForm> {
   String? _caloriesFrom;
   String? _caloriesTo;
   String? _selectedMealType;
-  List<String> _selectedDietLabels = [];
+  final List<String> _selectedDietLabels = [];
   bool _isButtonEnabled = false;
 
   final List<String> _dietLabels = [

@@ -8,7 +8,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(RecipePreviewAdapter());
   await Hive.openBox('favouritesBox');
-  runApp(WhatEat());
+  runApp(const WhatEat());
 }
 class WhatEat extends StatelessWidget {
   const WhatEat({super.key});
@@ -18,7 +18,7 @@ class WhatEat extends StatelessWidget {
     return MaterialApp(
       title: "WhatEat!",
       theme: themeRegular,
-      home: App(), 
+      home: const App(), 
     );
   }
 }

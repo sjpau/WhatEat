@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:what_eat_flutter/widgets/recyclers/botton_navigation_bar.dart';
 import 'package:what_eat_flutter/pages/search.dart';
 import 'package:what_eat_flutter/pages/favourites.dart';

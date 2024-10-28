@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 import 'package:what_eat_flutter/widgets/recyclers/recipe_tile.dart';
 
 class FavouritesPage extends StatelessWidget {
 
-  const FavouritesPage({Key? key}) : super(key: key);
+  const FavouritesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

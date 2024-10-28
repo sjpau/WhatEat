@@ -5,7 +5,7 @@ import 'package:what_eat_flutter/widgets/recyclers/recipe_tile.dart';
 class ResultsPage extends StatelessWidget {
   final List<RecipePreview> recipes;
 
-  const ResultsPage({Key? key, required this.recipes}) : super(key: key);
+  const ResultsPage({super.key, required this.recipes});
 
   @override
   Widget build(BuildContext context) {
