@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:what_eat_flutter/pages/app.dart';
+import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 import 'styles/theme_regular.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(RecipePreviewAdapter());
+  await Hive.openBox('favouritesBox');
+  runApp(WhatEat());
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class WhatEat extends StatelessWidget {
+  const WhatEat({super.key});
 
   @override
   Widget build(BuildContext context) {

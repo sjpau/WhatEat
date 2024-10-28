@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:what_eat_flutter/pages/recipe.dart';
 import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 
@@ -39,10 +40,13 @@ class RecipeTile extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       onTap: () {
+        final favouritesBox = Hive.box('favouritesBox');
+        final isFavourite = favouritesBox.containsKey(recipe.url);
+        print("NOT IN FAVORITES!!" + recipe.url);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => RecipePage(recipe: recipe),
+            builder: (context) => RecipePage(recipe: recipe, isFavourite: isFavourite),
           ),
         );
       },

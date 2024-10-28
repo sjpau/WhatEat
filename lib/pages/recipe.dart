@@ -1,20 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class RecipePage extends StatelessWidget {
+class RecipePage extends StatefulWidget {
   final RecipePreview recipe;
+  final bool isFavourite;
 
-  const RecipePage({Key? key, required this.recipe}) : super(key: key);
+  const RecipePage({Key? key, required this.recipe, required this.isFavourite})
+      : super(key: key);
+
+  @override
+  _RecipePageState createState() => _RecipePageState();
+}
+class _RecipePageState extends State<RecipePage> {
+  late bool isFavourite; 
+  late Box favouritesBox;
+
+  @override
+  void initState() {
+    super.initState();
+    favouritesBox = Hive.box('favouritesBox');
+    isFavourite = widget.isFavourite; 
+  }
+  void toggleFavorite() {
+    setState(() {
+      isFavourite = !isFavourite;
+    });
+
+    print("" + isFavourite.toString());
+    if (isFavourite) {
+      favouritesBox.put(widget.recipe.url, widget.recipe);
+      if (favouritesBox.containsKey(widget.recipe.url)) {
+        print("IN FAVS: " + widget.recipe.url);
+      }
+    } else {
+      print("DELETING");
+      favouritesBox.delete(widget.recipe.url);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          recipe.label,
+          widget.recipe.label,
           style: theme.appBarTheme.titleTextStyle,
         ),
       ),
@@ -23,7 +58,7 @@ class RecipePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              recipe.image,
+              widget.recipe.image,
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
@@ -38,11 +73,11 @@ class RecipePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Calories: ${recipe.calories.toStringAsFixed(0)}',
+                    'Calories: ${widget.recipe.calories.toStringAsFixed(0)}',
                     style: theme.textTheme.bodyLarge,
                   ),
                   Text(
-                    'Ingredients: ${recipe.ingredientCount}',
+                    'Ingredients: ${widget.recipe.ingredientCount}',
                     style: theme.textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 16),
@@ -50,7 +85,7 @@ class RecipePage extends StatelessWidget {
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: recipe.healthLabels.map((label) {
+                    children: widget.recipe.healthLabels.map((label) {
                       return Chip(
                         label: Text(label),
                         backgroundColor: theme.chipTheme.backgroundColor,
@@ -71,10 +106,12 @@ class RecipePage extends StatelessWidget {
           children: [
             ElevatedButton.icon(
               onPressed: () {
-                // TODO: Functionality to be implemented
+                setState(() {
+                  toggleFavorite();
+                });
               },
-              icon: const Icon(Icons.favorite_border),
-              label: const Text("Add to Favorites"),
+              icon: !isFavourite ? const Icon(Icons.favorite_border) : const Icon(Icons.favorite),
+              label: !isFavourite ? const Text("Add to Favourites") : const Text("Remove from Favourites"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 foregroundColor: theme.colorScheme.secondary,
@@ -85,7 +122,7 @@ class RecipePage extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () async {
-                final url = Uri.parse(recipe.url);
+                final url = Uri.parse(widget.recipe.url);
                 await _launchUrl(url); 
               },
               child: const Text("Full Recipe"),
