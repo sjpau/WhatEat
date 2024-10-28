@@ -28,14 +28,9 @@ class _RecipePageState extends State<RecipePage> {
       isFavourite = !isFavourite;
     });
 
-    print("" + isFavourite.toString());
     if (isFavourite) {
       favouritesBox.put(widget.recipe.url, widget.recipe);
-      if (favouritesBox.containsKey(widget.recipe.url)) {
-        print("IN FAVS: " + widget.recipe.url);
-      }
     } else {
-      print("DELETING");
       favouritesBox.delete(widget.recipe.url);
     }
   }

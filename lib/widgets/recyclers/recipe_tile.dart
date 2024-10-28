@@ -42,7 +42,6 @@ class RecipeTile extends StatelessWidget {
       onTap: () {
         final favouritesBox = Hive.box('favouritesBox');
         final isFavourite = favouritesBox.containsKey(recipe.url);
-        print("NOT IN FAVORITES!!" + recipe.url);
         Navigator.push(
           context,
           MaterialPageRoute(
