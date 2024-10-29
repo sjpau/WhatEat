@@ -1,16 +1,20 @@
-# what_eat_flutter
+# WhatEat! 🍽️
 
-A new Flutter project.
+WhatEat! is a Flutter application designed to help users explore recipes and save favorites. The app integrates with the Edamam API.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+### Search Screen
+![Search Screen](pix/search.png)
 
-A few resources to get you started if this is your first Flutter project:
+### Search Results
+![Search Results](pix/results.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Recipe Detail
+![Recipe Detail](pix/recipe.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Favorites
+![Favourites](pix/favourites.png)
+
+### Settings 
+![Settings](pix/settings.png)
