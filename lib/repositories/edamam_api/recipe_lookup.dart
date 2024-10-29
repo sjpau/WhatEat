@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:what_eat_flutter/repositories/edamam_api/models/recipe_preview.dart';
 import 'package:what_eat_flutter/utils/build_api.dart';
 
@@ -9,21 +8,14 @@ class RecipeRepository {
     String apiUrl = buildApiUrl(searchParams);
 
     try {
-      for (final e in searchParams.entries) {
-        debugPrint('${e.key} = ${e.value}');
-      }
-      debugPrint(apiUrl);
       Response response = await _dio.get(apiUrl);
 
       if (response.statusCode == 200) {
-        debugPrint('Recipes fetched successfully: ${response.toString()}');
         final List<RecipePreview> recipes = extractRecipes(response.data);
         return recipes;
-      } else {
-        debugPrint('Error fetching recipes: ${response.statusCode}');
-      }
+      } 
     } catch (e) {
-      debugPrint('Error making request: $e');
+      /* TODO: log */
     }
     return [];
   }
